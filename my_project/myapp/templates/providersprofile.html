@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Provider Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        .profile-container {
+            width: 70%;
+            margin: 30px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .profile-header {
+            display: flex;
+            align-items: center;
+        }
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-right: 20px;
+            object-fit: cover;
+            border: 2px solid #0453f1;
+        }
+        .profile-info h2 {
+            margin: 0;
+            font-size: 28px;
+            color: #333;
+        }
+        .profile-info p {
+            margin: 5px 0;
+            color: #666;
+        }
+        .section {
+            margin-top: 30px;
+        }
+        .section h3 {
+            font-size: 22px;
+            border-bottom: 2px solid #0e43f1;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .reviews {
+            list-style: none;
+            padding: 0;
+        }
+        .reviews li {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+        .reviews li h4 {
+            margin: 0;
+            font-size: 18px;
+            color: #1934e3;
+        }
+        .reviews li p {
+            margin: 5px 0;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+<div class="profile-container">
+    <!-- Profile Header -->
+    <div class="profile-header">
+        <img src="provider-placeholder.jpg" alt="Provider Image" class="profile-img">
+        <div class="profile-info">
+            <h2>Dr. John Doe</h2>
+            <p>Specialty: Cardiologist</p>
+            <p>Contact: johndoe@hospital.com</p>
+            <p>Phone: (123) 456-7890</p>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <div class="section">
+        <h3>About</h3>
+        <p>Dr. John Doe is a board-certified cardiologist with 15 years of experience in diagnosing and treating heart conditions. He is committed to providing patient-centered care and using the latest advancements in cardiology to improve health outcomes.</p>
+    </div>
+
+    <!-- Reviews Section -->
+    <div class="section">
+        <h3>Patient Reviews</h3>
+        <ul class="reviews">
+            <li>
+                <h4>Jane Smith</h4>
+                <p>Rating: ★★★★☆</p>
+                <p>Dr. Doe was very attentive and thorough. I felt confident in his care.</p>
+            </li>
+            <li>
+                <h4>Mike Johnson</h4>
+                <p>Rating: ★★★★★</p>
+                <p>Excellent doctor! He answered all my questions and made me feel comfortable.</p>
+            </li>
+        </ul>
+    </div>
+</div>
+
+</body>

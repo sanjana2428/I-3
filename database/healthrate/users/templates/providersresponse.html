@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Provider Responses</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+        .reviews-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .review-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .review-card h4 {
+            margin: 0 0 10px;
+        }
+        .review-card p {
+            margin: 5px 0;
+            color: #555;
+        }
+        .response-container {
+            background: #f1f1f1;
+            padding: 10px;
+            margin-top: 15px;
+            border-radius: 5px;
+        }
+        .response-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none;
+        }
+        .response-form button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #071aef;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .response-form button:hover {
+            background-color: #3a4be7;
+        }
+    </style>
+</head>
+<body>
+  <div class="reviews-container">
+    <!-- Example Review -->
+    {% for review in reviews %}
+    <div class="review-card" data-review-id="{{ review.id }}">
+        <h4>{{ review.patient.username }}</h4>
+        <p>Rating: {{ review.rating }}</p>
+        <p>{{ review.content }}</p>
+        
+        <!-- Provider Response Section -->
+        <div class="response-container">
+            <strong>Provider Response:</strong>
+            <div class="response-text" id="response-{{ review.id }}">
+                {% if review.response %}
+                    {{ review.response.response_text }}
+                {% else %}
+                    <em>No response yet.</em>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Response Form -->
+        <form class="response-form" method="POST" action="{% url 'submit_response' review.id %}">
+            {% csrf_token %}
+            <textarea id="response-input-{{ review.id }}" name="response_text" rows="3" placeholder="Write your response..."></textarea>
+            <button type="submit">Submit Response</button>
+        </form>
+    </div>
+    {% endfor %}
+  </div>
+</body>
+</html>

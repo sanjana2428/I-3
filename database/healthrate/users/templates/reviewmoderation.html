@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Moderation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        .reviews-container {
+            width: 80%;
+            margin: 20px auto;
+        }
+        .review-card {
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(21, 21, 21, 0.95);
+        }
+        .review-card h4 {
+            margin: 0 0 5px;
+        }
+        .review-card p {
+            margin: 5px 0;
+            color: #555;
+        }
+        .flag-btn {
+            background-color: #f50414;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .flag-btn:hover {
+            background-color: #f70515;
+        }
+    </style>
+</head>
+<body>
+
+<div class="reviews-container">
+    <!-- Sample Reviews -->
+    <div class="review-card" data-review-id="1">
+        <h4>Jane Doe</h4>
+        <p>Rating: ★★★★★</p>
+        <p>Excellent service and care!</p>
+        <button class="flag-btn">Flag as Inappropriate</button>
+    </div>
+    <div class="review-card" data-review-id="2">
+        <h4>John Smith</h4>
+        <p>Rating: ★☆☆☆☆</p>
+        <p>Spam content: Buy meds at low prices here!</p>
+        <button class="flag-btn">Flag as Inappropriate</button>
+    </div>
+</div>
+
+<script>
+    // Event Listener for Flag Buttons
+    document.querySelectorAll('.flag-btn').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const reviewCard = e.target.closest('.review-card');
+            const reviewId = reviewCard.getAttribute('data-review-id');
+            
+            // Send flag request to backend (Example AJAX call)
+            fetch('flag_review.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ review_id: reviewId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Review flagged for moderation!');
+                } else {
+                    alert('Failed to flag the review. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again later.');
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

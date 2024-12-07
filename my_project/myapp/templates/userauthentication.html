@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Authentication and Review</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      line-height: 1.6;
+    }
+    .form-container {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #0d26c6;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+    .success-message {
+      color: rgb(9, 26, 214);
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>User Authentication</h2>
+    <form id="auth-form">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" placeholder="Enter your username" required>
+      </div>
+      <div class="form-group">
+        <label for="patient-id">Patient ID</label>
+        <input type="text" id="patient-id" placeholder="Enter your patient ID" required>
+      </div>
+      <div class="form-group">
+        <label for="dob">Date of Birth</label>
+        <input type="date" id="dob" required>
+      </div>
+      <button type="button" id="verify-button">Verify</button>
+      <p id="auth-message" class="success-message" style="display: none;">You are verified!</p>
+    </form>
+
+    <h2>Submit a Review</h2>
+    <form id="review-form">
+      <div class="form-group">
+        <label for="provider">Provider</label>
+        <input type="text" id="provider" placeholder="Enter provider name" required disabled>
+      </div>
+      <div class="form-group">
+        <label for="rating">Rating</label>
+        <select id="rating" required disabled>
+          <option value="" disabled selected>Select a rating</option>
+          <option value="1">1 - Poor</option>
+          <option value="2">2 - Fair</option>
+          <option value="3">3 - Good</option>
+          <option value="4">4 - Very Good</option>
+          <option value="5">5 - Excellent</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="review">Review</label>
+        <textarea id="review" placeholder="Write your review here..." rows="5" required disabled></textarea>
+      </div>
+      <button type="submit" id="submit-review" disabled>Submit Review</button>
+    </form>
+  </div>
+
+  <script>
+    const verifyButton = document.getElementById("verify-button");
+    const authMessage = document.getElementById("auth-message");
+    const providerInput = document.getElementById("provider");
+    const ratingInput = document.getElementById("rating");
+    const reviewInput = document.getElementById("review");
+    const submitReviewButton = document.getElementById("submit-review");
+
+    verifyButton.addEventListener("click", () => {
+      const username = document.getElementById("username").value.trim();
+      const patientId = document.getElementById("patient-id").value.trim();
+      const dob = document.getElementById("dob").value;
+
+      if (username && patientId && dob) {
+        // Simulate verification process (You can replace this with actual logic)
+        authMessage.style.display = "block";
+
+        // Enable review form
+        providerInput.disabled = false;
+        ratingInput.disabled = false;
+        reviewInput.disabled = false;
+        submitReviewButton.disabled = false;
+      } else {
+        alert("Please fill all fields to verify.");
+      }
+    });
+
+    const reviewForm = document.getElementById("review-form");
+    reviewForm.addEventListener("submit", (e) => {
+      e.preventDefault(); // Prevent actual form submission
+      const provider = providerInput.value.trim();
+      const rating = ratingInput.value;
+      const review = reviewInput.value.trim();
+
+      if (provider && rating && review) {
+        alert("Thank you for your review!");
+        reviewForm.reset();
+        providerInput.disabled = true;
+        ratingInput.disabled = true;
+        reviewInput.disabled = true;
+        submitReviewButton.disabled = true;
+        authMessage.style.display = "none"; // Reset verification state
+      } else {
+        alert("Please complete the review form before submitting.");
+      }
+    });
+  </script>
+</body>
+</html>

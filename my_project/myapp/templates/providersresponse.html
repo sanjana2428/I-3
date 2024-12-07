@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Provider Responses</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+        .reviews-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .review-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .review-card h4 {
+            margin: 0 0 10px;
+        }
+        .review-card p {
+            margin: 5px 0;
+            color: #555;
+        }
+        .response-container {
+            background: #f1f1f1;
+            padding: 10px;
+            margin-top: 15px;
+            border-radius: 5px;
+        }
+        .response-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none;
+        }
+        .response-form button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #071aef;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .response-form button:hover {
+            background-color: #3a4be7;
+        }
+    </style>
+</head>
+<body>
+
+<div class="reviews-container">
+    <!-- Example Review -->
+    <div class="review-card" data-review-id="1">
+        <h4>Jane Doe</h4>
+        <p>Rating: ★★★★☆</p>
+        <p>Great service but the waiting time was too long.</p>
+        
+        <!-- Provider Response Section -->
+        <div class="response-container">
+            <strong>Provider Response:</strong>
+            <div class="response-text" id="response-1">
+                <!-- Response content will load here -->
+                <em>No response yet.</em>
+            </div>
+        </div>
+
+        <!-- Response Form -->
+        <form class="response-form" onsubmit="submitResponse(event, 1)">
+            <textarea id="response-input-1" rows="3" placeholder="Write your response..."></textarea>
+            <button type="submit">Submit Response</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Function to handle response submission
+    function submitResponse(event, reviewId) {
+        event.preventDefault();
+
+        const responseText = document.getElementById(response-input-${reviewId}).value;
+
+        if (!responseText.trim()) {
+            alert('Response cannot be empty.');
+            return;
+        }
+
+        // Simulate a backend call (you can replace this with an actual API call)
+        fetch('submit_response.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ review_id: reviewId, response: responseText })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                document.getElementById(response-1).innerHTML = responseText;
+                alert('Response submitted successfully!');
+            } else {
+                alert('Failed to submit response. Please try again.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again later.');
+        });
+
+        // Clear the input field
+        document.getElementById(response-input-${reviewId}).value = '';
+    }
+</script>
+
+</body>
+</html>
